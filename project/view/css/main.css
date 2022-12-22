@@ -322,6 +322,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
+  flex: 1;
   align-items: center;
   height: 65%;
   margin-right: 55px;
@@ -356,6 +357,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
+  flex: 1;
   align-items: center;
 }
 
