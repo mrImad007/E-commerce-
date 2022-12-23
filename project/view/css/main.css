@@ -3065,6 +3065,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .hov-img0 img{
   width: 100%;
+  height: 160px;
   -webkit-transition: transform 0.9s ease;
   -o-transition: transform 0.9s ease;
   -moz-transition: transform 0.9s ease;
