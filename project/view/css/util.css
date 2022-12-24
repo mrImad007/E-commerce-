@@ -3435,7 +3435,7 @@ iframe {border: none;}
 }
 
 .flex-sb-m {
-	justify-content: space-between;
+	justify-content: center;
 	-ms-align-items: center;
 	align-items: center;
 }
