@@ -490,7 +490,6 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   cursor: pointer;
 }
 
-
 /*---------------------------------------------*/
 .icon-header-noti::after {
   content: attr(data-notify);
