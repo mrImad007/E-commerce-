@@ -68,19 +68,19 @@
 							</li>
 
 							<li>
-								<a href="shoping-cart.html">Mycart</a>
+								<a href="shoping-cart.php">Mycart</a>
 							</li>
 
 							<li>
-								<a href="blog.html">Blog</a>
+								<a href="blog.php">Blog</a>
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="about.php">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="contact.php">Contact</a>
 							</li>
 						</ul>
 					</div>	
