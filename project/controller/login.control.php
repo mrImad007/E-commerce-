@@ -10,4 +10,11 @@
             $password = $_POST['password'];
             
             $conn = new login();
-            $conn->
+            $conn->check($user,$password);
+        }
+    }
+}
+
+$exe = new checklogin();
+$exe->doLogin();
+?>
