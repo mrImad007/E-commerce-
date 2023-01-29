@@ -1,8 +1,5 @@
 <?php
-	include('../model/helpers/showProducts.model.php');
-	$show = new show;
-	$products = $show->AllProducts();
-	
+	include('../controller/showAll.control.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

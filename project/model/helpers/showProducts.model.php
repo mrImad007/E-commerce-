@@ -1,5 +1,5 @@
 <?php
-    include_once('C:\wamp64\www\e-comm\project\model\database\database.model.php');
+    include_once('../model/database/database.model.php');
 
     class show extends database{
 

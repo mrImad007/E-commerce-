@@ -1,6 +1,6 @@
 <?php
     class database{
-        private $host = "mysql:host=localhost;port=3306;dbname=brief6";
+        private $host = "mysql:host=localhost;port=3306;dbname=electroMaroc";
         private $root = 'root';
         private $pwd = '';
 
