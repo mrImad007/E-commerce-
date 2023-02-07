@@ -1,9 +1,11 @@
 
+// Project: Electro Maroc
+// Version: Beta 
+// Assigned to:  Imad Eddine Zaoui
+// Project type: E-commerce web site
+
 (function ($) {
     "use strict";
-
-    /*[ Load page ]
-    ===========================================================*/
     $(".animsition").animsition({
         inClass: 'fade-in',
         outClass: 'fade-out',
@@ -24,8 +26,6 @@
         transition: function(url){ window.location.href = url; }
     });
     
-    /*[ Back to top ]
-    ===========================================================*/
     var windowH = $(window).height()/2;
 
     $(window).on('scroll',function(){
@@ -41,8 +41,6 @@
     });
 
 
-    /*==================================================================
-    [ Fixed Header ]*/
     var headerDesktop = $('.container-menu-desktop');
     var wrapMenu = $('.wrap-menu-desktop');
 
@@ -75,8 +73,6 @@
     });
 
 
-    /*==================================================================
-    [ Menu mobile ]*/
     $('.btn-show-menu-mobile').on('click', function(){
         $(this).toggleClass('is-active');
         $('.menu-mobile').slideToggle();

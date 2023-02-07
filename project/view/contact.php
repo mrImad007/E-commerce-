@@ -1,3 +1,9 @@
+<!-- 
+Project: Electro Maroc
+Version: Beta 
+Assigned to:  Imad Eddine Zaoui
+Project type: E-commerce web site
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>

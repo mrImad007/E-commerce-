@@ -1,19 +1,24 @@
 <?php
-    require('../model/log/login.model.php');
+    include_once('../model/log/login.model.php');
 
     class checklogin extends login {
         public function doLogin(){
                     
-        if(isset($_POST['username']) && isset($_POST['password'])){
+        if(isset($_POST['email']) && isset($_POST['password'])){
             session_start();
             
-            $user = $_POST['username'];
+            $email = $_POST['email'];
             $password = $_POST['password'];
             
             $conn = new login();
-            $conn->check($user,$password);
+            $return = $conn->check($email,$password);
 
-            $_SESSION['user']=$user;
+            if($return){
+                $_SESSION['login']=$email;
+                header('Location: ../view/contact.php');
+            }else{
+                header('location: ../view/signin.php');
+            }
         }
     }
 }

@@ -1,11 +1,10 @@
-
+// Project: Electro Maroc
+// Version: Beta 
+// Assigned to:  Imad Eddine Zaoui
+// Project type: E-commerce web site
 
 (function ($) {
-    // USE STRICT
     "use strict";
-
-        /*==================================================================
-        [ Slick1 ]*/
         $('.wrap-slick1').each(function(){
             var wrapSlick1 = $(this);
             var slick1 = $(this).find('.slick1');

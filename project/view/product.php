@@ -85,9 +85,11 @@
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
 						<div class="icon-header-item signin">
+							<a href="../view/signin.php">
 							<button >
 								<img src="../view/images/icons/sign.png" alt="signin" style="width: 60%;" title="sign in">
 							</button>
+							</a>
 						</div>
 
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">

@@ -1,5 +1,9 @@
+// Project: Electro Maroc
+// Version: Beta 
+// Assigned to:  Imad Eddine Zaoui
+// Project type: E-commerce web site
+
 (function ($) {
-    // USE STRICT
     "use strict";
 
         $(document).ready(function () {
