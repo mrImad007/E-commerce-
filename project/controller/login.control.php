@@ -1,9 +1,10 @@
 <?php
-    include_once('../model/log/login.model.php');
 
+    include('../model/log/login.model.php');
+    
     class checklogin extends login {
         public function doLogin(){
-                    
+
         if(isset($_POST['email']) && isset($_POST['password'])){
             session_start();
             

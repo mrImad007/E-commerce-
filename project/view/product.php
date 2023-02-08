@@ -1,5 +1,5 @@
 <?php
-	include('../controller/showAll.control.php');
+	include('../controller/helpers/showAll.control.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
