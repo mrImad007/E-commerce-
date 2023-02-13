@@ -1,9 +1,11 @@
 <?php
 
+use checklogin as GlobalChecklogin;
+
     include('../model/log/login.model.php');
     
     class checklogin extends login {
-        public function doLogin(){
+        public static function doLogin(){
 
         if(isset($_POST['email']) && isset($_POST['password'])){
             session_start();
@@ -16,7 +18,7 @@
 
             if($return){
                 $_SESSION['login']=$email;
-                header('Location: ../view/contact.php');
+                header('Location: ../view/dashboard.php');
             }else{
                 header('location: ../view/signin.php');
             }
@@ -24,6 +26,5 @@
     }
 }
 
-$exe = new checklogin();
-$exe->doLogin();
+checklogin::doLogin();
 ?>
