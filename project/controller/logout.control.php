@@ -1,7 +1,7 @@
 <?php
     include('../controller/login.control.php');
     class logout extends checklogin {
-        public function logOut(){
+        public static function logOut(){
 
                 session_start();
                 session_unset();
@@ -11,6 +11,5 @@
         }
     }
 
-    $exe = new logout;
-    $exe->logOut();
+    logout::logOut();
 ?>

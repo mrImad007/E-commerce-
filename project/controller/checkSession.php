@@ -2,7 +2,7 @@
 include('../controller/login.control.php');
 
 class check extends checklogin{
-    public function checking(){
+    public static function checking(){
         
         if(!isset($_SESSION['login'])){
             header('Location: ../view/signin.php');
@@ -10,6 +10,5 @@ class check extends checklogin{
     }
 }
 
-$check = new check;
-$check->checking();
+check::checking(); 
 ?>
