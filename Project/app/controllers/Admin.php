@@ -16,10 +16,17 @@ class Admin extends Controller{
     //------------------------------------------------------
     public function show(){
         $products = $this->CrudModel->read();
+        $category = $this->CrudModel->category();
         $data= [
             'products' => $products
         ];
-        $this->view('Templates/Dashboard',$data);
+        $data2 = [
+            // 'id' => $category->id,
+            // 'name' => $category->name,
+            // 'descr' => $category->description
+            'category' => $category
+        ];
+        $this->view('Templates/Dashboard',$data,$data2);
     }
 
     //------------------------------------------------------
@@ -28,7 +35,7 @@ class Admin extends Controller{
         $data= [
             'category' => $category
         ];
-        $this->view('Templates/Addforms',$data);
+        $this->view('Templates/AddProd',$data);
     }
 
     //------------------------------------------------------
@@ -51,10 +58,13 @@ class Admin extends Controller{
             ];
 
             $data2 = [
+                // 'id' => $category->id,
+                // 'name' => $category->name,
+                // 'descr' => $category->description
                 'category' => $category
             ];
             
-            $this->view('Templates/Updateforms',$data,$data2);
+            $this->view('Templates/UpdateProd',$data,$data2);
         }else{
             echo "oups something went wrong, try again";        
         }
@@ -67,16 +77,9 @@ class Admin extends Controller{
 
             $image = $_FILES['image']['name'];
             $uploaded = $_FILES['image']['tmp_name'];
-            $file_destination = '../images/upload/' . $image;
+            $file_destination ='/Applications/XAMPP/xamppfiles/htdocs/ElectroSite/public/images/upload';
+            move_uploaded_file($uploaded, $file_destination."/".$image);
             
-
-
-            if(move_uploaded_file($uploaded, $file_destination)){
-                die('web');
-            }else{
-                die('zeb');
-            }
-
             $data = [
                 'label' => $_POST['label'],
                 'code' => $_POST['code'],
@@ -133,20 +136,73 @@ class Admin extends Controller{
             $this->CrudModel->deleteProduct($id);
             header('Location:'.URLROOT.'ElectroSite/public/Admin/show');
         }else{
-            echo "normale le le lle le";
+            echo "Id not provided";
+        }
+    }
+
+    //------------------------------------------------------Category Management
+    public function forms(){
+        $this->view('Templates/addCat');
+    }
+
+    //------------------------------------------------------
+    public function updtform(){
+        $id = $_POST['id'];
+        
+        $category = $this->CrudModel->singleCategory($id);
+
+        $data = [
+            'name' => $category->name,
+            'descr' => $category->description,
+            'image' => $category->image
+        ];
+
+        $this->view('Templates/UpdateCat', $data);
+
+    }
+    //------------------------------------------------------
+    public function addCat(){
+        
+        if(isset($_POST['name']) && isset($_POST['descr'])){
+
+            $data = [
+                'name' => $_POST['name'],
+                'descr' => $_POST['descr'],
+                'image' => $_FILES['image']['name']
+            ];
+
+            
+
+            $this->CrudModel->addCategory($data);
+
+            header('Location:'.URLROOT.'ElectroSite/public/Admin/show');
         }
     }
 
     //------------------------------------------------------
-    public function addcat(){
-        if(isset($_POST['name']) && isset($_POST['description']) && $_FILES['image']['name']){
+    public function updateCat(){
+        if(isset($_POST['name']) && isset($_POST['descr'])){
 
             $data = [
                 'name' => $_POST['name'],
-                'desc' => $_POST['description'],
-                'img' => $_FILES['image']['name']
+                'descr' => $_POST['descr'],
+                'image' => $_FILES['image']['name']
             ];
-            
+
+            $this->CrudModel->updateCategory($data);
+
+            header('Location:'.URLROOT.'ElectroSite/public/Admin/show');
+        }
+    }
+
+    //------------------------------------------------------
+    public function deleteCat(){
+        if(isset($_POST['id'])){
+            $id = $_POST['id'];
+            $this->CrudModel->deleteCategory($id);
+            header('Location:'.URLROOT.'ElectroSite/public/Admin/show');
+        }else{
+            echo "Id not provided";
         }
     }
     

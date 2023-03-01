@@ -303,6 +303,17 @@
                                         </a>
                                     </li>
                                     <li class="flex">
+                                        <a class=" text-white inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800"
+                                            href="<?= URLROOT?>ElectroSite/public/Admin/forms">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <span>Add Category</span>
+                                        </a>
+                                    </li>
+                                    <li class="flex">
                                         <a class="text-white inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800"
                                             href="<?= URLROOT?>ElectroSite/Log/doLogout">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none"
@@ -552,7 +563,7 @@
                             <div class="col-span-12 mt-5">
                                 <div class="grid gap-2 grid-cols-1 lg:grid-cols-1">
                                     <div class="bg-white p-4 shadow-lg rounded-lg">
-                                        <h1 class="font-bold text-base">commandes</h1>
+                                        <h1 class="font-bold text-base">Categories</h1>
                                         <div class="mt-4">
                                             <div class="flex flex-col">
                                                 <div class="-my-2 overflow-x-auto">
@@ -589,16 +600,16 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <!-- start loop -->
-                                                                <?php foreach($categories as $categorie):?>
+                                                                <?php foreach($data2['category'] as $category):?>
                                                                 <tbody class="bg-white divide-y divide-gray-200">
                                                                     <tr>
                                                                         <td
                                                                             class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                                            <p><?php echo $categorie['name']?></p>
+                                                                            <p><?= $category['name']?></p>
                                                                         </td>
                                                                         <td
                                                                             class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
-                                                                            <p><?php echo $categorie['description']?></p>
+                                                                            <p><?= $category['id']?></p>
                                                                         </td>
                                                                         <td
                                                                             class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
@@ -612,7 +623,7 @@
                                                                                         stroke-width="2"
                                                                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                                                 </svg>
-                                                                                <p><?php echo $categorie['description']?></p>
+                                                                                <p><?= $category['description']?></p>
                                                                             </div>
                                                                         </td>
                                                                         <td
@@ -621,8 +632,8 @@
                                                                                 <a href="#" class="text-blue-500 hover:text-blue-600">
 
                                                                                 </a>
-                                                                                <form action="../view/update.form.php" method="post">
-                                                                                <input type="hidden" name="productId" value="#">
+                                                                                <form action="<?= URLROOT?>ElectroSite/Public/admin/updtform" method="POST">
+                                                                                <input type="hidden" name="id" value="<?= $category['id']?>">
                                                                                     <button>
                                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                                             class="w-5 h-5 mr-1"
@@ -637,7 +648,7 @@
                                                                                     </button>
                                                                                 </form>
 
-                                                                                <form class="text-red-500 hover:text-red-600" action="../controller/delete.control.php" method="post">
+                                                                                <form class="text-red-500 hover:text-red-600" action="<?= URLROOT?>ElectroSite/Public/admin/deleteCat" method="post">
                                                                                     <button type="submit">
                                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                                             class="w-5 h-5 mr-1 ml-3"
@@ -650,7 +661,7 @@
                                                                                         </svg>
                                                                                         Delete
                                                                                     </button>
-                                                                                    <input type="hidden" name="productId" value="#">
+                                                                                    <input type="hidden" name="id" value="<?= $category['id']?>">
                                                                                 </form>
                                                                             </div>
                                                                         </td>

@@ -7,8 +7,7 @@ class Dash{
     public function __construct(){
         $this->pdo = new Database;
     }
-
-    //------------------------------------------------------
+    //------------------------------------------------------Product Management
     public function read(){
 
         $query = "SELECT products.*, category.name FROM `products` INNER JOIN category ON products.category_id = category.id";
@@ -16,7 +15,6 @@ class Dash{
         $products = $this->pdo->resultSet();
         return $products;
     }
-
     //------------------------------------------------------
     public function lonely($id){
 
@@ -25,7 +23,6 @@ class Dash{
         $product = $this->pdo->single();
         return $product;
     }
-
     //------------------------------------------------------
      public function addProduct($data){
         $this->pdo->prepare("INSERT INTO `products` (`image`, `label`, `codeBarre`, `buyP`, `sellP`, `finalP`, `category_id`, `description`, `color`) 
@@ -49,7 +46,6 @@ class Dash{
 
 
     }
-
     //------------------------------------------------------
 
     public function updateProduct($id,$label,$code,$buy,$sell,$final,$cat,$desc,$img){
@@ -68,7 +64,7 @@ class Dash{
         $this->pdo->query($query);
     }
 
-    //------------------------------------------------------
+    //------------------------------------------------------Category Management
     public function category(){
 
         $query = "SELECT * FROM `category`";
@@ -77,6 +73,14 @@ class Dash{
         return $categories;
     }
 
+    //------------------------------------------------------
+    public function singleCategory($id){
+
+        $query = "SELECT * FROM `category` WHERE id = '$id' ";
+        $this->pdo->prepare($query);
+        $category = $this->pdo->single();
+        return $category;
+    }
     //------------------------------------------------------
     public function getcategory($id){
 
@@ -88,8 +92,39 @@ class Dash{
     //------------------------------------------------------
     public function addCategory($data){
 
-        $query = "INSERT INTO `category`(`name`, `image`, `description`) VALUES () ";
+        $query = "INSERT INTO `category` (`name`, `image`, `description`) VALUES (:namee,:img,:descr) ";
+
+        $this->pdo->prepare($query);
+
+        $this->pdo->bind(':namee', $data['name']);
+        $this->pdo->bind(':img', $data['image']);
+        $this->pdo->bind(':descr', $data['descr']);
+
+        $this->pdo->execute();
+
     }
+    //------------------------------------------------------
+    public function updateCategory($data){
+        $query = "UPDATE `category`
+                SET `name` = :namee, `description` = :descr, `image` = :img
+                WHERE `id` = :id";
+
+        $this->pdo->prepare($query);
+
+        $this->pdo->bind(':namee', $data['name']);
+        $this->pdo->bind(':descr', $data['description']);
+        $this->pdo->bind(':img', $data['image']);
+
+        $this->pdo->execute();
+    } 
+    //------------------------------------------------------
+    public function deleteCategory($id){ 
+
+        $query = "DELETE FROM `category` WHERE id = '$id' ";
+        $this->pdo->query($query);
+    }
+
+
 
 }
 

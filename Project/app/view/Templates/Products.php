@@ -447,12 +447,13 @@ Project type: E-commerce web site
 				</div>
 			</div>
 			<div class="row isotope-grid">
+				<!-- start loop  -->
 			<?php foreach($data['products'] as $product):?>
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">
-							<img src="<?= $product['image']?>" alt="IMG-PRODUCT">
+							<img src="<?= URLROOT.'ElectroSite/public/images/upload/' . $product['image']?>" alt="IMG-PRODUCT">
 
 							
 								<form action="<?= URLROOT?>ElectroSite/public/user/showOne" method="POST" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
