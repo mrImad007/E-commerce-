@@ -169,7 +169,7 @@ Project type: E-commerce web site
 							</a>
 
 							<span class="header-cart-item-info">
-							<?= $prod['quantity']?> x <?= $prod['sellP']?>
+							<?= $prod['quantity']?> x <?= $prod['sellP']?> MAD
 							</span>
 						</div>
 					</li>
@@ -337,10 +337,10 @@ Project type: E-commerce web site
 								</span>
 							</div>
 						</div>
-						<form action="">
+						<form action="<?= URLROOT?>ElectroSite/User/sendCommande" method="POST">
 							<?php foreach ($data['products'] as $panier) : ?>
-									<input type="text" name="products[]" value="<?= $panier->id_p ?>" class="hiddenInp" hidden>
-									<input type="text" name="quantity[]" value="<?= $panier->quantite ?>" id="quantite" hidden>
+									<input type="text" name="products[]" value="<?= $panier['id_product'] ?>" class="hiddenInp" hidden>
+									<input type="text" name="quantity[]" value="<?= $panier['quantity'] ?>" id="quantite" hidden>
 								<?php endforeach ?>
 							<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 								Proceed to Checkout

@@ -118,14 +118,19 @@ class User extends Controller{
             $products = $_POST['products'];
             $quantity = $_POST['quantity'];
             // $total = $this->users->totalPrice();
+            // print_r($products);
+            // echo "////";
+            // print_r($quantity);
+            // die();
             $data = [
-                'id_client' => $_SESSION['id'],
+                'id_client' => 1,
                 'creation_date' => date('d-m-y'),
             ];
 
             $idCommande = $this->users->createCommande($data);
             if ($idCommande) {
-                for ($i = 0; $i < count($products); $i++) {
+
+                for ($i = 0; $i < count($products); $i++){
                     $data = [
                         'id_product' => $products[$i],
                         'id_commande' => $idCommande,
@@ -133,6 +138,7 @@ class User extends Controller{
                     ];
                     $this->users->addProductCommande($data);
                 }
+                
                 if ($this->users->finishCommande()) {
                     $this->users->clearPanier();
                     // redirect('commandes/commandeDetails');

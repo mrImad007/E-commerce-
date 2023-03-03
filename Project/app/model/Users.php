@@ -79,19 +79,21 @@ class Users{
     //-------------------------------------------
     public function createCommande($data) {
         $user = 1;
+        $ttl = '1232';
         $this->pdo->beginTransaction();
-        $this->pdo->prepare("INSERT INTO `commande`(`creation_date`, `user_id`) VALUES (:date, :user)");
+        $this->pdo->prepare("INSERT INTO `commandes`(`creation_date`, `user_id`, `total_price`) VALUES (:datee, :user, :ttl)");
         $this->pdo->bind(':user', $user);
-        $this->pdo->bind(':date', $data['creation_date']);
+        $this->pdo->bind(':datee', $data['creation_date']);
+        $this->pdo->bind(':ttl', $ttl);
         $this->pdo->execute();
         return $this->pdo->lastInserId();
     }
 
     public function addProductCommande($data) {
-        $this->pdo->prepare("INSERT INTO `product_command`(`id_command`, `id_product`, `quantity`) VALUES (:id_p, :id_c, :quantite)");
+        $this->pdo->prepare("INSERT INTO `product_command`(`id_command`, `id_product`, `quantity`) VALUES (:id_c, :id_p, :qtt)");
         $this->pdo->bind(':id_p', $data['id_product']);
         $this->pdo->bind(':id_c', $data['id_commande']);
-        $this->pdo->bind(':quantite', $data['quantite']);
+        $this->pdo->bind(':qtt', $data['quantite']);
         if ($this->pdo->execute()) {
             return true;
         } else {
@@ -110,7 +112,7 @@ class Users{
     // }
 
     public function clearPanier() {
-        $this->pdo->prepare("DELETE FROM panier");
+        $this->pdo->prepare("DELETE FROM cart");
         $this->pdo->execute();
     }
 }
