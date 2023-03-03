@@ -183,13 +183,16 @@ Project type: E-commerce web site
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
+						<form action="<?= URLROOT?>ElectroSite/Public/User/sendCommande" method="POST">
+							<a href="shoping-cart.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+								View Cart
+							</a>
+							<?php foreach ($data['products'] as $panier) : ?>
+								<input type="text" name="products[]" value="<?= $panier->id_p ?>" class="hiddenInp" hidden>
+								<input type="text" name="quantity[]" value="<?= $panier->quantite ?>" id="quantite" hidden>
+							<?php endforeach ?>
+								<button type="submit" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">Check Out</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -334,10 +337,15 @@ Project type: E-commerce web site
 								</span>
 							</div>
 						</div>
-
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
-						</button>
+						<form action="">
+							<?php foreach ($data['products'] as $panier) : ?>
+									<input type="text" name="products[]" value="<?= $panier->id_p ?>" class="hiddenInp" hidden>
+									<input type="text" name="quantity[]" value="<?= $panier->quantite ?>" id="quantite" hidden>
+								<?php endforeach ?>
+							<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+								Proceed to Checkout
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>

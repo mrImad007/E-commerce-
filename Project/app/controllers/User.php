@@ -112,6 +112,37 @@ class User extends Controller{
 
         }
     }
+    //--------------------------------------------
+    public function sendCommande() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $products = $_POST['products'];
+            $quantity = $_POST['quantity'];
+            // $total = $this->users->totalPrice();
+            $data = [
+                'id_client' => $_SESSION['id'],
+                'creation_date' => date('d-m-y'),
+            ];
+
+            $idCommande = $this->users->createCommande($data);
+            if ($idCommande) {
+                for ($i = 0; $i < count($products); $i++) {
+                    $data = [
+                        'id_product' => $products[$i],
+                        'id_commande' => $idCommande,
+                        'quantite' => $quantity[$i],
+                    ];
+                    $this->users->addProductCommande($data);
+                }
+                if ($this->users->finishCommande()) {
+                    $this->users->clearPanier();
+                    // redirect('commandes/commandeDetails');
+                    die("all set");
+                } else {
+                    die('SOMETHING WRONG ???');
+                }
+            }
+        }
+    }
 }
 
 
