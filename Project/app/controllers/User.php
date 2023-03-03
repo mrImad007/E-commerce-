@@ -44,13 +44,19 @@ class User extends Controller{
 
     //--------------------------------------------
     public function addCart(){
-        if(isset($_POST['label']) && isset($_POST['quantity']) && isset($_POST['user']) && isset($_POST['total'])){
-            $label = $_POST['label'];
-            $qtt = $_POST['quantity'];
-            $user = $_POST['user'];
-            $total = $_POST['total'];
+        if(isset($_POST['label']) && isset($_POST['qtt'])){
+            
+            $data = [
+                'user' => 'imad',
+                'label' => $_POST['label'],
+                'qtt' => $_POST['qtt'],
+                'total' => 666
+            ];
 
-            $this->users->addtocart($label,$user,$qtt,$total);
+            // print_r($data);die();
+            $this->users->addtocart($data);
+
+            header('Location:'.URLROOT.'ElectroSite/public/Pages/cart');
         }
     }
 
@@ -74,6 +80,36 @@ class User extends Controller{
             ];
 
             $this->view('Templates/Product-detail',$data);
+        }
+    }
+
+    //--------------------------------------------
+    public function deleteCart(){
+        
+        if(isset($_POST['This_id'])){
+            $id = $_POST['This_id'];
+            
+            $this->users->deleteFromCart($id);
+
+            header('Location:'.URLROOT.'ElectroSite/public/Pages/cart');
+
+        }
+    }
+    //--------------------------------------------
+    public function updateCart(){
+        if(isset($_POST['productId']) && isset($_POST['qtt'])){
+            $data = [
+                'id' => $_POST['productId'],
+                'qtt' => $_POST['qtt']
+            ];
+
+            $this->users->updateCart($data);
+
+            die('done');
+            header('Location:'.URLROOT.'ElectroSite/public/Pages/cart');
+
+
+
         }
     }
 }

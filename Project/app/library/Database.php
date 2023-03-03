@@ -90,6 +90,16 @@ class Database {
         $products = $this->stmt->fetch(PDO::FETCH_OBJ);
         return $products;
     }
+
+    public function beginTransaction() {
+        $this->pdo->beginTransaction();
+    }
+    public function lastInserId() {
+        return $this->pdo->lastInsertId();
+    }
+    public function commit() {
+        return $this->pdo->commit();
+    }
 }
 
 ?>

@@ -25,27 +25,27 @@ require (APPROOT.'/view/components/header.php');?>
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li class="active-menu">
-								<a href="index.php">Home</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/index">Home</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="product.php">Shop</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/products">Shop</a>
 							</li>
 
 							<li>
-								<a href="shoping-cart.php">Mycart</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/cart">Mycart</a>
 							</li>
 
 							<li>
-								<a href="blog.php">Blog</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/blog">Blog</a>
 							</li>
 
 							<li>
-								<a href="about.php">About</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/about">About</a>
 							</li>
 
 							<li>
-								<a href="contact.php">Contact</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/contact">Contact</a>
 							</li>
 						</ul>
 					</div>	
@@ -273,11 +273,11 @@ require (APPROOT.'/view/components/header.php');?>
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-							<?= $data['label']?>, <?php echo $data['color']?>
+							<?= $data['label']?>, <?= $data['color']?>
 						</h4>
 
 						<span class="mtext-106 cl2">
-							<?= $data['buyP']?>
+							<?= $data['buyP']?> MAD
 						</span><br><br><br><br><br>
 						
 						<!--  -->
@@ -302,25 +302,28 @@ require (APPROOT.'/view/components/header.php');?>
 								</div>
 							</div>
 
+							<form action="<?= URLROOT?>ElectroSite/Public/User/addCart" method="POST">
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-204 flex-w flex-m respon6-next">
 									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
 										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-minus"></i>
 										</div>
-
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+										
+										<input class="mtext-104 cl3 txt-center num-product" type="number" name="qtt" value="1">
 
 										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 											<i class="fs-16 zmdi zmdi-plus"></i>
 										</div>
-									</div>
+										<input type="hidden" name="label" value="<?= $data['label']?>">
+									</div> 
 
 									<button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 										Add to cart
 									</button>
 								</div>
 							</div>	
+							</form>
 						</div>
 
 						<!--  -->

@@ -3,10 +3,12 @@ class Pages extends Controller{
 
     //------------------------------------------------------
     private $CrudModel;
+    private $UsersModel;
     //------------------------------------------------------
     public function __construct()
     {
         $this->CrudModel = $this->model('Dash');
+        $this->UsersModel = $this->model('Users');
     }
 
     //------------------------------------------------------
@@ -45,7 +47,11 @@ class Pages extends Controller{
 
     //------------------------------------------------------
     public function cart(){
-        $this->view('Templates/Shoping-cart');
+        $prod = $this->UsersModel->seeCart();
+        $data = [
+            'products' => $prod
+        ];
+        $this->view('Templates/Shoping-cart',$data);
     }
 
     //------------------------------------------------------

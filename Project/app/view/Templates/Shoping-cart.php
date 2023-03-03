@@ -156,53 +156,25 @@ Project type: E-commerce web site
 			
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
+					<!-- loop start  -->
+					<?php foreach($data['products'] as $prod) :?>
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="<?= URLROOT ?>/ElectroSite/public/images/item-cart-01.jpg" alt="IMG">
+							<img src="<?= URLROOT.'ElectroSite/public/images/upload/' . $prod['image']?>" alt="IMG">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
+							<?= $prod['label']?>
 							</a>
 
 							<span class="header-cart-item-info">
-								1 x $19.00
+							<?= $prod['quantity']?> x <?= $prod['sellP']?>
 							</span>
 						</div>
 					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="<?= URLROOT ?>/ElectroSite/public/images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="<?= URLROOT ?>/ElectroSite/public/images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
+					<?php endforeach;?>
+					<!-- loop end  -->
 				</ul>
 				
 				<div class="w-full">
@@ -226,10 +198,10 @@ Project type: E-commerce web site
 		
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85">
+	<form class="bg0 p-t-75 p-b-85" action="<?= URLROOT?>ElectroSite/User/updateCart" method="POST">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+				<div class="col-lg-10 col-xl-10 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<div class="wrap-table-shopping-cart">
 							<table class="table-shopping-cart">
@@ -240,64 +212,50 @@ Project type: E-commerce web site
 									<th class="column-4">Quantity</th>
 									<th class="column-5">Total</th>
 								</tr>
-
+								<!-- loop start  -->
+								<?php foreach($data['products'] as $prod) :?>
 								<tr class="table_row">
 									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="<?= URLROOT ?>/ElectroSite/public/images/item-cart-04.jpg" alt="IMG">
+										<div class="how-itemcart">
+											<img src="<?= URLROOT.'ElectroSite/public/images/upload/' . $prod['image']?>" alt="IMG">
+											<form action="<?=URLROOT?>ElectroSite/User/deleteCart" method="POST">
+												<input type="hidden" name="This_id" value="<?= $prod['id_product']?>">
+												<button type="submit">X</button>
+											</form>
 										</div>
 									</td>
-									<td class="column-2">Fresh Strawberries</td>
-									<td class="column-3">$ 36.00</td>
+									<td class="column-2"><?= $prod['label']?></td>
+									<td class="column-3"><?= $prod['sellP']?> MAD</td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
 											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="qtt" value="<?= $prod['quantity']?>">
+											
 
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
 									</td>
-									<td class="column-5">$ 36.00</td>
+									<td class="column-5"><?= $prod['total_price']?> MAD</td>
+									<input type="hidden" name="productId" value="<?= $prod['id_product']?>">
 								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="<?= URLROOT ?>/ElectroSite/public/images/item-cart-05.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Lightweight Jacket</td>
-									<td class="column-3">$ 16.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 16.00</td>
-								</tr>
+							<?php endforeach;?>
+								<!-- loop end -->
 							</table>
 						</div>
 
 						<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
 							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-								Update Cart
+								<button type="submit">Update Cart</button>
 							</div>
 						</div>
 					</div>
 				</div>
+		</form>
 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
@@ -384,7 +342,7 @@ Project type: E-commerce web site
 				</div>
 			</div>
 		</div>
-	</form>
+	
 		
 	
 		
