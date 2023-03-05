@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="<?= URLROOT?>ElectroSite/Log/doLogin" method="POST">
+    <form action="<?= URLROOT?>ElectroSite/User/logIn" method="POST">
         <label>name :</label>
         <input type="email" placeholder="enter your email" name="email"><br>
         <label>password</label>
-        <input type="password" placeholder="enter your password" name="password"><br>
+        <input type="password" placeholder="enter your password" name="pwd"><br>
         <button type="submit">connect</button>
     </form>
 </body>

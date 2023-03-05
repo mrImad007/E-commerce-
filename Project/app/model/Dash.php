@@ -7,6 +7,16 @@ class Dash{
     public function __construct(){
         $this->pdo = new Database;
     }
+    //------------------------------------------------------Admin Log
+
+    public function login($email,$password){
+
+        $query = "SELECT * FROM `admin` WHERE `email` = '$email' AND `password` = '$password' ";
+        $this->pdo->prepare($query);
+        $user = $this->pdo->resultSet();
+
+        return $user;
+    }
     //------------------------------------------------------Product Management
     public function read(){
 

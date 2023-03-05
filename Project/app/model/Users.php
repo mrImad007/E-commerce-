@@ -15,7 +15,7 @@ class Users{
     }
 
     //--------------------------------------------
-    public function Log($email,$pwd){
+    public function log($email,$pwd){
         
         $query = "SELECT * FROM `users` WHERE `email`= '$email' AND `password` = '$pwd' ";
         $this->pdo->prepare($query);

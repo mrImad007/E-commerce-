@@ -169,7 +169,7 @@ Project type: E-commerce web site
 							</a>
 
 							<span class="header-cart-item-info">
-							<?= $prod['quantity']?> x <?= $prod['sellP']?> MAD
+							<?= $prod['quantity']?> x <?= $prod['sellP']?>
 							</span>
 						</div>
 					</li>
@@ -201,7 +201,7 @@ Project type: E-commerce web site
 		
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85" action="<?= URLROOT?>ElectroSite/User/updateCart" method="POST">
+	<form class="bg0 p-t-75 p-b-85" action="<?=URLROOT?>ElectroSite/User/updateCart" method="POST">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-10 m-lr-auto m-b-50">
@@ -221,10 +221,13 @@ Project type: E-commerce web site
 									<td class="column-1">
 										<div class="how-itemcart">
 											<img src="<?= URLROOT.'ElectroSite/public/images/upload/' . $prod['image']?>" alt="IMG">
-											<form action="<?=URLROOT?>ElectroSite/User/deleteCart" method="POST">
+											<form ></form>
+											<form action="<?=URLROOT?>ElectroSite/User/deleteCart" method="post">
 												<input type="hidden" name="This_id" value="<?= $prod['id_product']?>">
 												<button type="submit">X</button>
 											</form>
+												
+											
 										</div>
 									</td>
 									<td class="column-2"><?= $prod['label']?></td>
@@ -337,7 +340,7 @@ Project type: E-commerce web site
 								</span>
 							</div>
 						</div>
-						<form action="<?= URLROOT?>ElectroSite/User/sendCommande" method="POST">
+						<form action="<?= URLROOT?>ElectroSite/User/checkLogin" method="POST">
 							<?php foreach ($data['products'] as $panier) : ?>
 									<input type="text" name="products[]" value="<?= $panier['id_product'] ?>" class="hiddenInp" hidden>
 									<input type="text" name="quantity[]" value="<?= $panier['quantity'] ?>" id="quantite" hidden>

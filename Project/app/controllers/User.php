@@ -20,7 +20,7 @@ class User extends Controller{
 
             $this->users->register($name,$image,$email,$pwd,$tel,$adress);
             
-            $this->view('Templates/contact');
+            $this->view('Templates/signin');
         };
     }
 
@@ -33,12 +33,11 @@ class User extends Controller{
             $return = $this->users->log($email,$pwd);
 
             if($return){
-                echo "loged in";
-                // header('Location:'.URLROOT.'ElectroSite/public/Admin/show');            
+                $_SESSION['user'] = $email;
+                header('Location:'.URLROOT.'ElectroSite/public/Pages/cart');
             }else{
-                echo "user not found";
+                $this->view('Templates/signin');
             }
-
         };
     }
 
@@ -141,12 +140,20 @@ class User extends Controller{
                 
                 if ($this->users->finishCommande()) {
                     $this->users->clearPanier();
-                    // redirect('commandes/commandeDetails');
-                    die("all set");
+                    header('Location : '.URLROOT.'ElectroSite/public/Pages/cart');
                 } else {
                     die('SOMETHING WRONG ???');
                 }
             }
+        }
+    }
+    //--------------------------------------------
+    public function checkLogin(){
+        
+        if(isset($_SESSION['user'])){
+            $this->sendCommande();
+        }else{
+            $this->view('Templates/signin');
         }
     }
 }
