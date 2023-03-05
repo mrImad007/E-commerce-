@@ -69,6 +69,11 @@ class Pages extends Controller{
         $this->view('Templates/UserSign');
     }
 
+    //------------------------------------------------------
+    public function error(){
+        $this->view('Templates/error');
+    }
+
     
 }
 ?>

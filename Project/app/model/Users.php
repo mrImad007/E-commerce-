@@ -78,13 +78,15 @@ class Users{
     }
     //-------------------------------------------
     public function createCommande($data) {
-        $user = 1;
+        
         $ttl = '1232';
         $this->pdo->beginTransaction();
         $this->pdo->prepare("INSERT INTO `commandes`(`creation_date`, `user_id`, `total_price`) VALUES (:datee, :user, :ttl)");
-        $this->pdo->bind(':user', $user);
+        
+        $this->pdo->bind(':user', $data['id_client']->id);
         $this->pdo->bind(':datee', $data['creation_date']);
         $this->pdo->bind(':ttl', $ttl);
+        
         $this->pdo->execute();
         return $this->pdo->lastInserId();
     }
@@ -94,7 +96,7 @@ class Users{
         $this->pdo->bind(':id_p', $data['id_product']);
         $this->pdo->bind(':id_c', $data['id_commande']);
         $this->pdo->bind(':qtt', $data['quantite']);
-        if ($this->pdo->execute()) {
+        if ($this->pdo->execute()){
             return true;
         } else {
             return false;
@@ -114,6 +116,14 @@ class Users{
     public function clearPanier() {
         $this->pdo->prepare("DELETE FROM cart");
         $this->pdo->execute();
+    }
+
+    public function getUser($email){
+        $query = "SELECT id FROM users WHERE email = :email";
+        $this->pdo->prepare($query);
+        $this->pdo->bind(':email', $email);
+        $id = $this->pdo->single();
+        return $id;
     }
 }
 

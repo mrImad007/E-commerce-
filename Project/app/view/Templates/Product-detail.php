@@ -25,27 +25,27 @@ require (APPROOT.'/view/components/header.php');?>
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li class="active-menu">
-								<a href="<?= URLROOT ?>/ElectroSite/public/index">Home</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/Pages/index">Home</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="<?= URLROOT ?>/ElectroSite/public/products">Shop</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/Pages/products">Shop</a>
 							</li>
 
 							<li>
-								<a href="<?= URLROOT ?>/ElectroSite/public/cart">Mycart</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/Pages/cart">Mycart</a>
 							</li>
 
 							<li>
-								<a href="<?= URLROOT ?>/ElectroSite/public/blog">Blog</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/Pages/blog">Blog</a>
 							</li>
 
 							<li>
-								<a href="<?= URLROOT ?>/ElectroSite/public/about">About</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/Pages/about">About</a>
 							</li>
 
 							<li>
-								<a href="<?= URLROOT ?>/ElectroSite/public/contact">Contact</a>
+								<a href="<?= URLROOT ?>/ElectroSite/public/Pages/contact">Contact</a>
 							</li>
 						</ul>
 					</div>	
@@ -240,7 +240,7 @@ require (APPROOT.'/view/components/header.php');?>
 									<div class="wrap-pic-w pos-relative">
 										<img src="<?= URLROOT.'ElectroSite/public/images/upload/' . $data['image']?>" alt="IMG-PRODUCT">
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="<?= URLROOT.'ElectroSite/public/images/upload/' . $data['image']?>">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>

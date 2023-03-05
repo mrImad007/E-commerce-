@@ -114,17 +114,19 @@ class User extends Controller{
     //--------------------------------------------
     public function sendCommande() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if(isset($_POST['products']) && isset($_POST['quantity'])){
+
             $products = $_POST['products'];
             $quantity = $_POST['quantity'];
-            // $total = $this->users->totalPrice();
-            // print_r($products);
-            // echo "////";
-            // print_r($quantity);
-            // die();
+            $email = $_SESSION['user'];
+
+            $id = $this->users->getUser($email);
+
             $data = [
-                'id_client' => 1,
+                'id_client' => $id,
                 'creation_date' => date('d-m-y'),
             ];
+            
 
             $idCommande = $this->users->createCommande($data);
             if ($idCommande) {
@@ -140,13 +142,16 @@ class User extends Controller{
                 
                 if ($this->users->finishCommande()) {
                     $this->users->clearPanier();
-                    header('Location : '.URLROOT.'ElectroSite/public/Pages/cart');
+                    $this->view('Templates/products');
                 } else {
                     die('SOMETHING WRONG ???');
                 }
             }
+        }else{
+            $this->view('Templates/error');
         }
     }
+}
     //--------------------------------------------
     public function checkLogin(){
         
