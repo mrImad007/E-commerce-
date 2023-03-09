@@ -14,5 +14,8 @@
         <input type="password" placeholder="enter your password" name="pwd"><br>
         <button type="submit">connect</button>
     </form>
+    <a href="<?= URLROOT?>ElectroSite/Pages/registerForms">
+        <button>register</button>
+    </a>
 </body>
 </html>

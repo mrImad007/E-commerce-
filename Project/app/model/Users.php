@@ -1,5 +1,6 @@
 <?php
 class Users{
+
     protected $pdo;
     
     //--------------------------------------------
@@ -33,6 +34,7 @@ class Users{
         return $myprods;
 
     }
+
     //--------------------------------------------
     public function addtocart($data){
 
@@ -56,6 +58,7 @@ class Users{
         $product = $this->pdo->single();
         return $product;
     }
+
     //--------------------------------------------
     public function deleteFromCart($id){
         $query = "DELETE FROM `cart` WHERE  `id_product`= :id";
@@ -64,6 +67,7 @@ class Users{
         $this->pdo->execute();
 
     }
+
     //--------------------------------------------
     public function updateCart($data){
         $query = "  UPDATE `cart`
@@ -76,6 +80,7 @@ class Users{
         $this->pdo->bind(':ttl', $data['ttl']);
         $this->pdo->execute();
     }
+
     //-------------------------------------------
     public function createCommande($data) {
         
@@ -91,6 +96,7 @@ class Users{
         return $this->pdo->lastInserId();
     }
 
+    //-------------------------------------------
     public function addProductCommande($data) {
         $this->pdo->prepare("INSERT INTO `product_command`(`id_command`, `id_product`, `quantity`) VALUES (:id_c, :id_p, :qtt)");
         $this->pdo->bind(':id_p', $data['id_product']);
@@ -103,21 +109,25 @@ class Users{
         }
     }
 
+    //-------------------------------------------
     public function finishCommande() {
         return $this->pdo->commit();
     }
 
+    //-------------------------------------------
     // public function totalPrice() {
     //     $this->pdo->query("SELECT SUM(p.selling_price * pc.quantite) as price FROM product_commande pc JOIN product p ON p.id_p = pc.id_product JOIN commande c ON c.id = pc.id_commande GROUP BY id_commande");
     //     $row = $this->pdo->single();
     //     return $row;
     // }
 
+    //-------------------------------------------
     public function clearPanier() {
         $this->pdo->prepare("DELETE FROM cart");
         $this->pdo->execute();
     }
 
+    //-------------------------------------------
     public function getUser($email){
         $query = "SELECT id FROM users WHERE email = :email";
         $this->pdo->prepare($query);

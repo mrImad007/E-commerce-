@@ -1,6 +1,7 @@
 <?php
 
 class User extends Controller{
+
     protected $pdo;
     protected $users;
 
@@ -20,7 +21,7 @@ class User extends Controller{
 
             $this->users->register($name,$image,$email,$pwd,$tel,$adress);
             
-            $this->view('Templates/signin');
+            $this->view('Templates/UserSign');
         };
     }
 
@@ -36,7 +37,7 @@ class User extends Controller{
                 $_SESSION['user'] = $email;
                 header('Location:'.URLROOT.'ElectroSite/public/Pages/cart');
             }else{
-                $this->view('Templates/signin');
+                $this->view('Templates/UserSign');
             }
         };
     }
@@ -52,7 +53,6 @@ class User extends Controller{
                 'total' => 666
             ];
 
-            // print_r($data);die();
             $this->users->addtocart($data);
 
             header('Location:'.URLROOT.'ElectroSite/public/Pages/cart');
@@ -107,8 +107,6 @@ class User extends Controller{
             die('done');
             header('Location:'.URLROOT.'ElectroSite/public/Pages/cart');
 
-
-
         }
     }
     //--------------------------------------------
@@ -142,7 +140,7 @@ class User extends Controller{
                 
                 if ($this->users->finishCommande()) {
                     $this->users->clearPanier();
-                    $this->view('Templates/products');
+                    $this->view('Templates/Cart');
                 } else {
                     die('SOMETHING WRONG ???');
                 }
@@ -158,7 +156,7 @@ class User extends Controller{
         if(isset($_SESSION['user'])){
             $this->sendCommande();
         }else{
-            $this->view('Templates/signin');
+            $this->view('Templates/UserSign');
         }
     }
 }

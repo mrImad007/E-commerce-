@@ -10,19 +10,19 @@
 
         public function doLogin(){
             
-            if(isset($_POST['email']) && isset($_POST['password'])){
+            if(isset($_POST['email']) && isset($_POST['pwd'])){
                 session_start();
-            
-            
                 $email = $_POST['email'];
-                $password = $_POST['password'];
-            
+                $password = $_POST['pwd'];
+               
                 $return = $this->LoginModel->login($email,$password);
 
                 if($return){
-                $_SESSION['login']=$email;
+                $_SESSION['admin'] = $email;
+    
                 header('Location:'.URLROOT.'ElectroSite/public/Admin/show');
                 }else{
+                    
                 header('Location:'.URLROOT.'ElectroSite/public/Pages/signin');
                 }
             }
@@ -34,7 +34,7 @@
             session_unset();
             session_destroy();
 
-            header('Location:'.URLROOT.'ElectroSite/public/Pages/contact');
+            header('Location:'.URLROOT.'ElectroSite/public/Pages/index');
         }
 }
 

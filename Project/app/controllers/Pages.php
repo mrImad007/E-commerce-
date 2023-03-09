@@ -13,21 +13,34 @@ class Pages extends Controller{
 
     //------------------------------------------------------
     public function index(){
-       $this->view('Templates/index');
+        $prod = $this->UsersModel->seeCart();
+        $data = [
+            'products' => $prod
+        ];
+       $this->view('Templates/index',$data);
     }
 
     //------------------------------------------------------
     public function products(){
         $products = $this->CrudModel->read();
+        $prod = $this->UsersModel->seeCart();
         $data= [
             'products' => $products,
         ];
-        $this->view('Templates/Products',$data);
+        
+        $data2 = [
+            'products' => $prod
+        ];
+        $this->view('Templates/Products',$data,$data2);
     }
 
     //------------------------------------------------------
     public function about(){
-        $this->view('Templates/About');
+        $prod = $this->UsersModel->seeCart();
+        $data = [
+            'products' => $prod
+        ];
+        $this->view('Templates/About',$data);
     }
 
     //------------------------------------------------------
@@ -37,12 +50,21 @@ class Pages extends Controller{
 
     //------------------------------------------------------
     public function blog(){
-        $this->view('Templates/Blog');
+
+        $prod = $this->UsersModel->seeCart();
+        $data = [
+            'products' => $prod
+        ];
+        $this->view('Templates/Blog',$data);
     }
 
     //------------------------------------------------------
     public function contact(){
-        $this->view('Templates/Contact');
+        $prod = $this->UsersModel->seeCart();
+        $data = [
+            'products' => $prod
+        ];
+        $this->view('Templates/Contact',$data);
     }
 
     //------------------------------------------------------
@@ -68,12 +90,14 @@ class Pages extends Controller{
     public function entry(){
         $this->view('Templates/UserSign');
     }
+    //------------------------------------------------------
+    public function registerForms(){
+        $this->view('Templates/Register');
+    }
 
     //------------------------------------------------------
     public function error(){
         $this->view('Templates/error');
     }
-
-    
 }
 ?>

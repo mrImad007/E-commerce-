@@ -15,18 +15,22 @@ class Admin extends Controller{
 
     //------------------------------------------------------
     public function show(){
-        $products = $this->CrudModel->read();
-        $category = $this->CrudModel->category();
-        $data= [
-            'products' => $products
-        ];
-        $data2 = [
-            // 'id' => $category->id,
-            // 'name' => $category->name,
-            // 'descr' => $category->description
-            'category' => $category
-        ];
-        $this->view('Templates/Dashboard',$data,$data2);
+        if(isset($_SESSION['admin'])){
+            $products = $this->CrudModel->read();
+            $category = $this->CrudModel->category();
+            
+            $data= [
+                'products' => $products
+            ];
+
+            $data2 = [
+                'category' => $category
+            ];
+
+            $this->view('Templates/Dashboard',$data,$data2);
+        }else{
+        $this->view('Templates/Signin');
+    }
     }
 
     //------------------------------------------------------
@@ -58,9 +62,6 @@ class Admin extends Controller{
             ];
 
             $data2 = [
-                // 'id' => $category->id,
-                // 'name' => $category->name,
-                // 'descr' => $category->description
                 'category' => $category
             ];
             
