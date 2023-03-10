@@ -124,9 +124,10 @@ class User extends Controller{
                 'id_client' => $id,
                 'creation_date' => date('d-m-y'),
             ];
-            
 
             $idCommande = $this->users->createCommande($data);
+            
+   
             if ($idCommande) {
 
                 for ($i = 0; $i < count($products); $i++){
@@ -138,9 +139,13 @@ class User extends Controller{
                     $this->users->addProductCommande($data);
                 }
                 
+                
                 if ($this->users->finishCommande()) {
+                    $total = $this->users->totalPrice($idCommande);
+                    $this->users->updatePrice($idCommande,$total);
+
                     $this->users->clearPanier();
-                    $this->view('Templates/Cart');
+                    $this->view('Templates/index');
                 } else {
                     die('SOMETHING WRONG ???');
                 }
@@ -150,6 +155,37 @@ class User extends Controller{
         }
     }
 }
+    //--------------------------------------------
+    public function userCommands(){
+        if(isset($_POST['user_id'])){
+            $user_id = $_POST['user_id'];
+            $commands = $this->users->getCommands($user_id);
+
+        }
+    }
+
+    //--------------------------------------------
+    public function acceptCommands(){
+        if(isset($_POST['command_id'])){
+            $data = [
+                'shipping_date' => date('d-m-y'),
+                'id' => $_POST['command_id']
+            ];
+
+            $this->users->accept($data);
+            header('Location:'.URLROOT.'ElectroSite/public/Admin/show');
+        }
+    }
+
+    //--------------------------------------------
+    public function rejectCommands(){
+        if(isset($_POST['command_id'])){
+            $id = $_POST['command_id'];
+
+            $this->users->reject($id);
+            header('Location:'.URLROOT.'ElectroSite/public/Admin/show');
+        }
+    }
     //--------------------------------------------
     public function checkLogin(){
         

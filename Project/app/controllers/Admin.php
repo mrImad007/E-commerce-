@@ -4,13 +4,14 @@ class Admin extends Controller{
 
     //------------------------------------------------------
     private $CrudModel;
-    private $pdo;
+    private $users;
 
     //------------------------------------------------------
     public function __construct()
     {
         $this->pdo = new Database;
         $this->CrudModel = $this->model('Dash');
+        $this->users = $this->model('Users');
     }
 
     //------------------------------------------------------
@@ -18,16 +19,15 @@ class Admin extends Controller{
         if(isset($_SESSION['admin'])){
             $products = $this->CrudModel->read();
             $category = $this->CrudModel->category();
+            $commands = $this->users->getAllCommands();
             
             $data= [
-                'products' => $products
+                'products' => $products,
+                'category' => $category,
+                'commands' => $commands,
             ];
 
-            $data2 = [
-                'category' => $category
-            ];
-
-            $this->view('Templates/Dashboard',$data,$data2);
+            $this->view('Templates/Dashboard',$data);
         }else{
         $this->view('Templates/Signin');
     }

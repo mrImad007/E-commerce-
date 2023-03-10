@@ -83,15 +83,14 @@ class Users{
 
     //-------------------------------------------
     public function createCommande($data) {
-        
-        $ttl = '1232';
+        $ttl = 0;
         $this->pdo->beginTransaction();
-        $this->pdo->prepare("INSERT INTO `commandes`(`creation_date`, `user_id`, `total_price`) VALUES (:datee, :user, :ttl)");
+        $this->pdo->prepare("INSERT INTO `commandes`(`creation_date`, `shipping_date`, `user_id`, `total_price`) VALUES (:crDate, NULL, :user, :ttl)");
         
         $this->pdo->bind(':user', $data['id_client']->id);
-        $this->pdo->bind(':datee', $data['creation_date']);
+        $this->pdo->bind(':crDate', $data['creation_date']);
         $this->pdo->bind(':ttl', $ttl);
-        
+
         $this->pdo->execute();
         return $this->pdo->lastInserId();
     }
@@ -114,13 +113,66 @@ class Users{
         return $this->pdo->commit();
     }
 
-    //-------------------------------------------
-    // public function totalPrice() {
-    //     $this->pdo->query("SELECT SUM(p.selling_price * pc.quantite) as price FROM product_commande pc JOIN product p ON p.id_p = pc.id_product JOIN commande c ON c.id = pc.id_commande GROUP BY id_commande");
-    //     $row = $this->pdo->single();
-    //     return $row;
-    // }
+    //--------------------------------------------
+    public function getCommands($user_id){
+        $query = "SELECT * FROM `commandes` WHERE `user_id` = :user";
+        $this->pdo->prepare($query);
+        $this->pdo->bind(':user', $user_id);
+        $command = $this->pdo->resultSet();
+        return $command;
+    }
 
+    //--------------------------------------------
+    public function getAllCommands(){
+        $query = "SELECT * FROM `commandes` ";
+        $this->pdo->prepare($query);
+        $commands = $this->pdo->resultSet();
+        return $commands;
+    }
+
+    //--------------------------------------------
+    public function accept($data){
+        $query = "  UPDATE `commandes`
+                    SET `shipping_date` = :shDate, `status` = 'Accepted'
+                    WHERE id = :id";
+
+        $this->pdo->prepare($query);
+        $this->pdo->bind(':shDate', $data['shipping_date']);
+        $this->pdo->bind(':id', $data['id']);
+        $this->pdo->execute();
+        
+    }
+
+    //--------------------------------------------
+    public function reject($id){
+        $query = "DELETE FROM `commandes` WHERE  `id`= :id";
+        $this->pdo->prepare($query);
+        $this->pdo->bind(':id',$id);
+        $this->pdo->execute();
+
+    }
+
+    //-------------------------------------------
+    public function totalPrice($id) {
+        $this->pdo->prepare("SELECT SUM(p.buyP * pc.quantity) as price FROM product_command pc JOIN products p ON p.id = pc.id_product JOIN commandes c ON c.id = pc.id_command WHERE c.id = :id GROUP BY id_command");
+        $this->pdo->bind(':id', $id);
+        $row = $this->pdo->single();
+        return $row;
+    }
+
+    //-------------------------------------------
+    public function updatePrice($id,$total) {
+        
+        $query = "  UPDATE `commandes`
+                    SET `total_price` = :ttl
+                    WHERE `commandes`.id = :id ";
+        $this->pdo->prepare($query);
+        $this->pdo->bind(':ttl', $total->price);
+        $this->pdo->bind(':id', $id);
+        
+        $this->pdo->execute();
+    }
+    
     //-------------------------------------------
     public function clearPanier() {
         $this->pdo->prepare("DELETE FROM cart");

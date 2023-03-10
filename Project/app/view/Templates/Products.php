@@ -57,7 +57,7 @@ Project type: E-commerce web site
 						<div class="icon-header-item signin">
 							<a href="<?= URLROOT ?>ElectroSite/public/pages/signin">
 							<button >
-								<img src="<?php echo URLROOT?>ElectroSite/public/../view/images/icons/sign.png" alt="signin" style="width: 60%;" title="sign in">
+								<img src=""  style="width: 60%;">
 							</button>
 							</a>
 						</div>
