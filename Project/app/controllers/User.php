@@ -143,9 +143,13 @@ class User extends Controller{
                 if ($this->users->finishCommande()) {
                     $total = $this->users->totalPrice($idCommande);
                     $this->users->updatePrice($idCommande,$total);
-
                     $this->users->clearPanier();
-                    $this->view('Templates/index');
+                    $command = $this->users->facture($idCommande);
+                    $data = [
+                        'command' => $command
+                    ];
+                    
+                    $this->view('Templates/Facture',$data);
                 } else {
                     die('SOMETHING WRONG ???');
                 }

@@ -277,7 +277,7 @@ require (APPROOT.'/view/components/header.php');?>
 						</h4>
 
 						<span class="mtext-106 cl2">
-							<?= $data['buyP']?> MAD
+							<?= $data['sellP']?> MAD
 						</span><br><br><br><br><br>
 						
 						<!--  -->

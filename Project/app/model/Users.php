@@ -154,7 +154,7 @@ class Users{
 
     //-------------------------------------------
     public function totalPrice($id) {
-        $this->pdo->prepare("SELECT SUM(p.buyP * pc.quantity) as price FROM product_command pc JOIN products p ON p.id = pc.id_product JOIN commandes c ON c.id = pc.id_command WHERE c.id = :id GROUP BY id_command");
+        $this->pdo->prepare("SELECT SUM(p.sellP * pc.quantity) as price FROM product_command pc JOIN products p ON p.id = pc.id_product JOIN commandes c ON c.id = pc.id_command WHERE c.id = :id GROUP BY id_command");
         $this->pdo->bind(':id', $id);
         $row = $this->pdo->single();
         return $row;
@@ -171,6 +171,14 @@ class Users{
         $this->pdo->bind(':id', $id);
         
         $this->pdo->execute();
+    }
+
+    public function facture($id){
+        $query = "SELECT `products`.label, `products`.sellP, `commandes`.`id`,`commandes`.`total_price`, quantity FROM `product_command` INNER JOIN products ON products.id = product_command.id_product INNER JOIN commandes ON commandes.id = product_command.id_command WHERE id_command = :id";
+        $this->pdo->prepare($query);
+        $this->pdo->bind(':id', $id);
+        $return = $this->pdo->resultSet();
+        return $return;
     }
     
     //-------------------------------------------

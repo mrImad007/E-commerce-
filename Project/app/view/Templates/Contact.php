@@ -272,7 +272,7 @@ Project type: E-commerce web site
 							</span>
 
 							<p class="stext-115 cl6 size-213 p-t-18">
-								Coza Store Center 8th floor, 379 Hudson St, New York, NY 10018 US
+								ElectroMaroc , TechnoPark, Nearshore, Casablanca
 							</p>
 						</div>
 					</div>
@@ -304,7 +304,7 @@ Project type: E-commerce web site
 							</span>
 
 							<p class="stext-115 cl1 size-213 p-t-18">
-								contact@example.com
+								contact@ElectroMaroc.com
 							</p>
 						</div>
 					</div>
